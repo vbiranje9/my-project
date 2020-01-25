@@ -2,13 +2,18 @@ package com.cdac.StartupProject.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.cdac.StartupProject.dao.StartupDao;
+import com.cdac.StartupProject.model.Project;
 import com.cdac.StartupProject.model.Startup;
 
 @Repository
@@ -122,15 +127,33 @@ public class StartupDaoImple implements StartupDao {
 		return true;
 	}
 
-	/*@Override
-	public StartUp selectByEmail(String email
-@Override
-public boolean add(com.cdac.StartupProject.bean.StartUp startup) {
-	// TODO Auto-generated method stub
-	return false;
-}) {
+	@Override
+	public List<Project> selectAll() {
 		
-		return null;
-	}*/
+		List<Project> list = new ArrayList<Project>();
+		System.out.println("inside select all");
+		String sql= "select * from project";
+		list = jt.query(sql, new ResultSetExtractor<List<Project>>(){
+
+			@Override
+			public List<Project> extractData(ResultSet rs) throws SQLException, DataAccessException {
+				List<Project> li = new ArrayList<Project>();
+				
+				while(rs.next())
+				{
+					Project st = new Project();
+					st.setProjectName(rs.getString(2));
+					st.setProjetcId(rs.getInt(1));
+					li.add(st);
+				}
+				return li;
+			}
+	
+		});
+		System.out.println("selected project");
+		return list;
+	}
+
+	
 
 }

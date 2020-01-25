@@ -1,15 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            Login Page
-        </title>
-        <link rel="stylesheet" href="style.css">
+<head>
+<meta charset="ISO-8859-1">
+<title>Login Page</title>
+<link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-        
-    </head>
-    <body>
+</head>
+<body>
       <div class="login-page">
          <div class="form">
             <div class="col-3"></div>
@@ -24,9 +24,9 @@
                  
             <div class="row  mt-4" >
                 <div class="col-1"></div>
-                <div class="col-4 btn btn-primary"><a class="text-light" href="registerComp.html"> Company  </a> </div> 
+                <div class="col-4 btn btn-primary"><a class="text-light" href="registerComp.jsp"> Company  </a> </div> 
                 <div class="col-1"></div>
-                <div class="col-4 btn btn-primary"><a class="text-light"  href="registerStp.html">  Startup </a></div>
+                <div class="col-4 btn btn-primary"><a class="text-light"  href="registerStp.jsp">  Startup </a></div>
                     
 			
             </div>

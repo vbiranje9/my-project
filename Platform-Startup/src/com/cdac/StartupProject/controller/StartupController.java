@@ -2,9 +2,11 @@ package com.cdac.StartupProject.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,7 +45,6 @@ public class StartupController
 		// TODO Auto-generated constructor stub
 	}
 
-
 	@RequestMapping(value= "/stpReg.htm" , method = RequestMethod.POST)
 	public String save(@ModelAttribute("stp") Startup stp)
 	{
@@ -60,43 +61,68 @@ public class StartupController
 		
 	}
 	
+	@RequestMapping("/compStpLog.htm")
+	public String startlog()
+	{
+			return "login";
+	}
+	
 	@RequestMapping(value="/compStpLog.htm",method = RequestMethod.POST)
-	public ModelAndView save(@ModelAttribute("lg") Login lg,ModelMap modell)
+	public ModelAndView save(@ModelAttribute("lg") Login lg,HttpSession session)
 	{
 		ModelAndView model; 
 		
-		System.out.println("inside cntr"+lg.getUsername());
-		
 		try {
-			Login lgn = loginService.login(lg);
-			System.out.println(lgn.getFlag());
-		
-			if(lgn.getFlag() == 1)
-		{
-			  //List<Project>list = startUpService.selectAll();
-			model = new ModelAndView("startup_home");
-			//model.addObject("lists",list);
-			System.out.println("starthome");
-			return model;
-		}
-		else if (lgn.getFlag()==2) {
-			model=new ModelAndView("company_home");
-			return model;
-		}
-		else
-		{
-			model = new ModelAndView("login");
-			modell.addAttribute("msg", "Incorrect username and password");
-			return model;
-		}
+			Login lgn = loginService.login(lg);		
+			if(lgn.getFlag() == 1){
+				addUserInSession( lgn, session);
+				List<Project>list = startupService.selectAll();
+				model = new ModelAndView("startup_home");
+				model.addObject("lists",list);
+				System.out.println("returning model");
+				return model;
+				
+			}
+			else if (lgn.getFlag()==2) {
+				addUserInSession( lgn, session);
+				model=new ModelAndView("company_home");
+				return model;
+			}
+			else
+			{
+				model = new ModelAndView("login");
+				//modell.addAttribute("msg", "Incorrect username and password");
+				return model;
+			}
 		}catch(Exception e)
 		{
-			System.out.println("catch login");
-			model = new ModelAndView("login");
-			return model;
+				System.out.println("catch login");
+				model = new ModelAndView("login");
+				return model;
 		}
 		
 	}
 	
+	
+
+	private void addUserInSession(Login l,HttpSession session)
+	{
+		session.setAttribute("uname",l.getUsername());
+		session.setAttribute("pass", l.getPassword());
+		session.setAttribute("role", l.getFlag());
+	}
+	
+	@RequestMapping("/logout.htm")
+	public String logout(HttpSession session)
+	{
+		session.invalidate();
+		return "login";
+	}
+	
+	@RequestMapping("/apply.htm")
+	public String applyy()
+	{
+		return "demo";
+	}
 
 }

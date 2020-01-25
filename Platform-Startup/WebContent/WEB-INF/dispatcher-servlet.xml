@@ -14,7 +14,7 @@
 
 <bean id ="viewResolver"  class="org.springframework.web.servlet.view.InternalResourceViewResolver">    
 <property name="prefix" value="/"></property>    
-<property name="suffix" value=".html"></property>    
+<property name="suffix" value=".jsp"></property>    
 </bean>
 
 <bean id='jdbcid' class="org.springframework.jdbc.datasource.DriverManagerDataSource">

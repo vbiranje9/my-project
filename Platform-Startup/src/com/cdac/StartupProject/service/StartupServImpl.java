@@ -41,8 +41,8 @@ public class StartupServImpl implements StartupService {
 
 	@Override
 	public List<Project> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return startupDao.selectAll();
 	}
 
 	

@@ -1,4 +1,5 @@
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +27,7 @@
 		<input type="text" name ="date" placeholder="Registarion Date in YYYY-MM-DD"/>
 		<input type="password" name="password" placeholder="Enter Password"/>
         <input type="submit" value="Register"/>
-        <p class="message">Already Registered?<a href="login.html">Login</a></p>
+        <p class="message">Already Registered?<a href="login.jsp">Login</a></p>
     </form>
     </div>
     </div>

@@ -1,9 +1,13 @@
 package com.cdac.StartupProject.dao;
 
-import com.cdac.StartupProject.model.Company;
+import java.util.List;
+
+import com.cdac.StartupProject.model.*;
 
 public interface CompanyDao {
 
-		public Boolean insert(Company comp);
-		public Boolean compLogin(Company comp);
+		 Boolean insert(Company comp);
+		 Boolean compLogin(Company comp);
+		 Boolean addProject(Project pro,Login lg);
+		 List<Funding> selectStp();
 }
