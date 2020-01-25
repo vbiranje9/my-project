@@ -45,7 +45,10 @@ a:hover {
 <div class="container">
 
 <div class="col-12"><h1 class="text-dark">Startup List</h1></div>
-<div class="col-1"><a href="logout.htm"><h4>Logout</h4></a></div>
+<div class="col-12">
+	<span class="col-9"></span>
+	<span class="col-3"></span>
+</div>
 
 
 <!-- ----------------------------------------------------------------------------------------------------------------- -->
@@ -62,9 +65,6 @@ a:hover {
     </tr>
   </thead>
 
-		
-		
-			
   <tbody>
   <c:forEach items="${lists}" var="temp">
     <tr class="table-info">
@@ -75,17 +75,11 @@ a:hover {
        <td>${temp.fundAmount}</td>
        <td class="bg-light" ><a href="fix_meeting.jsp">Fix Meeting</a></td>
     </tr>
-    
-     
+
     </tr>
     </c:forEach>
   </tbody>
 </table>		
-		
-		
-		
-			
-		
 		
 <!-- ------------------------------------------------------------------------------------------------------------------ -->
 
