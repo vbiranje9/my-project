@@ -154,6 +154,36 @@ public class StartupDaoImple implements StartupDao {
 		return list;
 	}
 
-	
+	@Override
+	public List<Startup> selectStp() {
+		
+		List<Startup> list = new ArrayList<Startup>();
+		System.out.println("inside select stp");
+		String sql= "select * from startup";
+		list = jt.query(sql, new ResultSetExtractor<List<Startup>>(){
 
+			@Override
+			public List<Startup> extractData(ResultSet rs) throws SQLException, DataAccessException {
+				List<Startup> li = new ArrayList<Startup>();
+				
+				while(rs.next())
+				{
+					Startup st = new Startup();
+					
+					st.setStartUpId(rs.getInt(5));
+					st.setNoOfEmployee(rs.getInt(3));
+					st.setEmail(rs.getString(4));
+					st.setDiscription(rs.getString(2));
+					
+					li.add(st);
+				}
+				return li;
+			}
+	
+		});
+		System.out.println("selected stp");
+		return list;
+			
+	}
+	
 }

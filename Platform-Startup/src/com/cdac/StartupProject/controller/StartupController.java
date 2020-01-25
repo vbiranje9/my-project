@@ -85,7 +85,12 @@ public class StartupController
 			}
 			else if (lgn.getFlag()==2) {
 				addUserInSession( lgn, session);
+				
+				List<Startup>list = startupService.selectStp();
+				
 				model=new ModelAndView("company_home");
+				
+				model.addObject("lists",list);
 				return model;
 			}
 			else

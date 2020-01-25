@@ -12,4 +12,6 @@ public interface StartupDao {
 
 	List<Project> selectAll();
 
+	List<Startup> selectStp();
+
 }

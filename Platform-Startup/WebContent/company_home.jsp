@@ -47,6 +47,38 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
 
+
+<!-- ----------------------------------------------------------------------------------------------------------------- -->
+
+		<table class="table">
+  <thead>
+    <tr class="table-danger">
+     <th scope="col"></th>
+      <th scope="col">Startup Id</th>
+      <th scope="col">Employee</th>
+      <th scope="col">Email</th>
+      <th scope="col">Description</th>
+       <th scope="col">Profile</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <c:forEach items="${lists}" var="temp">
+    <tr class="table-info">
+      <th scope="row"></th>
+      <td>${temp.startUpId}</td>
+      <td>${temp.noOfEmployee}</td>
+      <td>${temp.email}</td>
+       <td>${temp.discription}</td>
+       <td class="bg-light" ><a href="view_profile.htm">View Profile</a></td>
+    </tr>
+
+  
+    </c:forEach>
+  </tbody>
+</table>		
+<!-- ------------------------------------------------------------------------------------------------------------------ -->
+
 <script>
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";

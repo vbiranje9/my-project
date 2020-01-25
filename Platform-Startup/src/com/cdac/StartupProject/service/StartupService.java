@@ -10,4 +10,5 @@ public interface StartupService {
 	boolean add(Startup startup);
 	Startup selectByEmail(String email);
 	List<Project> selectAll();
+	List<Startup> selectStp();
 }

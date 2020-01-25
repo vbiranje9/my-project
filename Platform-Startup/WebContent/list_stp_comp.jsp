@@ -39,16 +39,21 @@ a:hover {
 	<c:redirect url="login.jsp"></c:redirect>
 </c:if>
 
-<!--   <s:url var="lgot" value="/logout.htm"></s:url> -->
 
 	<c:if test="${sessionScope.uname !=null && sessionScope.role == 2}">
+<div >
+<div class="row bg-dark sticky-top " >
+		<div class="col-5"></div>
+		<div class="col-1" ><h5 style="height:60px; text-align: center; padding:15px"><a href="company_home.jsp">Home</a></h5></div>
+		<div class="col-2" ><h5 style="height:60px; text-align: center; padding:15px"><a href="comp_add_project.jsp">Add Project</a></h5></div>
+		<div class="col-2"><h5 style="height:65px; text-align: center; padding:15px"><a href="comp_project_list.jsp">Bid Details</a></h5></div>
+		<div class="col-1" ><h5 style="height:60px; text-align: center; padding:15px"><a href="logout.htm">Logout</a></h5></div>
+		<div class="col-1"></div>
+	</div>
+
 <div class="container">
 
-<div class="col-12"><h1 class="text-dark">Startup List</h1></div>
-<div class="col-12">
-	<span class="col-9"></span>
-	<span class="col-3"></span>
-</div>
+<div class="col-12" ><h2 style="background-color:lightgreen;  height:70px; text-align: center; padding:10px"> Startup's List who Applied for Funding </h2></div>
 
 
 <!-- ----------------------------------------------------------------------------------------------------------------- -->
@@ -82,7 +87,7 @@ a:hover {
 </table>		
 		
 <!-- ------------------------------------------------------------------------------------------------------------------ -->
-
+</div>
 </div>
 </c:if>
 </body>

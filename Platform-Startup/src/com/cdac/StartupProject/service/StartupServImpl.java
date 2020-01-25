@@ -45,6 +45,11 @@ public class StartupServImpl implements StartupService {
 		return startupDao.selectAll();
 	}
 
+	@Override
+	public List<Startup> selectStp() {
+		return startupDao.selectStp();
+	}
+
 	
 
 }
