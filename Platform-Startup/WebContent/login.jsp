@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,23 +92,18 @@
             <div class="col-6" style="font-size:20px;">Login Form</div> 
             <div class="col-3"><br></div> 
            
-             <form class="Login-form"  onsubmit="return validate()" action="compStpLog.htm" method="post">
+             <form class="Login-form"   action="compStpLog.htm" method="post">
                  
-                 <input type="text" id ="uname" name ="username"  placeholder="Username"/>
-                 <span id="ures" class="text-danger"></span>
+                 <input  type="text" id ="uname" name ="username"  placeholder="Username"/>
                  <input type="password" id="pass" name="password" placeholder="Password"/>
-                 <span id="pres" class="text-danger"></span>
                  <button  type="submit" class="bg-success">Login</button>
-                 
-              </form>
-                 
+             </form>    
+            
             <div class="row  mt-4" >
                 <div class="col-1"></div>
                 <div class="col-4 btn btn-primary"><a class="text-light" href="registerComp.jsp"> Company  </a> </div> 
                 <div class="col-1"></div>
                 <div class="col-4 btn btn-primary"><a class="text-light"  href="registerStp.jsp">  Startup </a></div>
-                    
-			
             </div>
         </div>   
       </div>

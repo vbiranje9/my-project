@@ -5,13 +5,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.startup.HomesUserDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.cdac.StartupProject.controller.StartupController;
+import com.cdac.StartupProject.model.Bidding;
 import com.cdac.StartupProject.model.Company;
 import com.cdac.StartupProject.model.Funding;
 import com.cdac.StartupProject.model.Login;
@@ -40,10 +47,6 @@ public class CompanyDaoImple implements CompanyDao {
 		
 		String sql;
 		
-		/*String sql = "insert into company values("+comp.getCompId()+",'"+comp.getCompName()+"')";
-		System.out.println(sql);
-		template.update(sql);//insert,update,delete*/
-		
 		sql="select * from gst where gst_id=? and pan=?";
 		
 		Company comp2=template.queryForObject(sql, new Object[] {comp.getGstId(),comp.getPan()} , new RowMapper<Company>(){
@@ -71,21 +74,18 @@ public class CompanyDaoImple implements CompanyDao {
 				flag
 		});
 		
-		System.out.println(a+"inserted into login");
 		
 		sql= "insert into user values(?,?,?,?,?,?)";
 		
 		a=template.update(sql, new Object [] {
 				
-				comp.getEmail(),
+				comp.getCompName(),
 				comp.getGstId(),
 				comp.getContactNo(),
 				comp.getEmail(),
 				comp.getPassword(),
 				flag
 		});
-		
-		System.out.println(a+"inserted into user");
 		
 		
 		
@@ -98,13 +98,9 @@ public class CompanyDaoImple implements CompanyDao {
 				flag
 		});
 		
-		System.out.println(a+"inserted into company");
-		
-		
-		
+	
 		sql="select * from Company where email=?";
 		Company comp1 = template.queryForObject(sql,new Object[] {comp.getEmail()}, new RowMapper<Company>(){
-
 			@Override
 			public Company mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Company temp = new Company();
@@ -113,10 +109,7 @@ public class CompanyDaoImple implements CompanyDao {
 			}
 		});
 		
-		//if(comp1 == null);
-			//return false;
-		System.out.println("selected comp id from table");
-		
+	
 		int cid=comp1.getCompanyId();
 		
 		sql="insert into gst_company values(?,?,?)";
@@ -127,9 +120,7 @@ public class CompanyDaoImple implements CompanyDao {
 				flag
 		});
 		
-		System.out.println("inserted into gst_company");
-		
-		
+
 		return true;
 	}
 
@@ -154,8 +145,6 @@ public class CompanyDaoImple implements CompanyDao {
 			}
 		 });
 		
-		 System.out.println("username is there"+comp1.getEmail());
-		 
 		 if(comp.getEmail()==comp1.getEmail() && comp.getPassword()==comp1.getPassword())
 			 	return true;
 		 else
@@ -165,8 +154,6 @@ public class CompanyDaoImple implements CompanyDao {
 
 	@Override
 	public Boolean addProject(Project pro,Login lg) {
-		
-		System.out.println("into dao add project");
 		
 		String sql;
 		sql="select company_id,flag from company where email=?";
@@ -184,8 +171,6 @@ public class CompanyDaoImple implements CompanyDao {
 			}
 		 });
 		 
-		System.out.println("selected id flag"+pro1.getComapanyId()+""+pro1.getFlag());
-		
 		 sql= "insert into project(project_name,project_technology,project_duration,project_description,project_bid_amount,company_id,flag) "
 		 		+ "values(?,?,?,?,?,?,?)";
 			
@@ -200,7 +185,6 @@ public class CompanyDaoImple implements CompanyDao {
 					pro1.getFlag()
 			});
 		 
-		 System.out.println("inserted into project");
 		return true;
 	}
 
@@ -208,7 +192,6 @@ public class CompanyDaoImple implements CompanyDao {
 	public List<Funding> selectStp() {
 		
 		List<Funding> list = new ArrayList<Funding>();
-		System.out.println("inside select stp");
 		
 		String sql="select *from funds";
 		list = template.query(sql, new ResultSetExtractor<List<Funding>>(){
@@ -230,7 +213,87 @@ public class CompanyDaoImple implements CompanyDao {
 			}
 	
 		});
-		System.out.println("returning list");
+
 		return list;
 	}
+
+	
+	@Override
+	public List<Bidding> selectStpBid() {
+		
+		ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+		HttpSession sesion = sra.getRequest().getSession();
+		int id = Integer.parseInt(sesion.getAttribute("id").toString());
+		
+		
+		List<Bidding> list = new ArrayList<Bidding>();
+		
+		String sql="select *from bidding_details where bid_status='Applied' and company_id=?";
+		list = template.query(sql, new Object[] { id } , new ResultSetExtractor<List<Bidding>>(){
+
+			@Override
+			public List<Bidding> extractData(ResultSet rs) throws SQLException, DataAccessException {
+				List<Bidding> li = new ArrayList<Bidding>();
+				
+				while(rs.next())
+				{
+					Bidding st = new Bidding();
+					st.setBidId(rs.getInt(1));
+					st.setProjectId(rs.getInt(2));
+					st.setCompanyId(rs.getInt(3));
+					st.setStartupId(rs.getInt(4));
+					st.setBidAmount(rs.getDouble(5));
+					st.setBidDuration(rs.getString(6));
+					st.setBidStatus(rs.getString(7));
+					st.setFlag(rs.getString(8));
+					
+					li.add(st);
+				}
+				return li;
+			}
+			
+		});
+		
+		return list;
+	}
+
+	@Override
+	public List<String> sname(List<Integer> sid) {
+		List<String>startupname  = new ArrayList<String>();
+		for (Integer integer : sid) {
+			String sql = "select user_name from user where email =(select email from startup where startup_id = ?)";
+			String s = template.queryForObject(sql,new Object[] {integer},String.class);
+			startupname.add(s);
+		}
+		
+		return startupname;
+	}
+	
+	@Override
+	public List<String> pname(List<Integer> pid) {
+		
+		ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+		HttpSession sesion = sra.getRequest().getSession();
+		int id = Integer.parseInt(sesion.getAttribute("id").toString());
+		 
+		List<String>projectname  = new ArrayList<String>();
+		
+		for (Integer integer : pid) {
+			
+			String sql = "select project_name from project where project_id=? and company_id=?";
+			String p = template.queryForObject(sql,new Object[] { integer, id },String.class);
+			projectname.add(p);
+		}
+		return projectname;
+	}
+	
+	@Override
+	public void selectProject(int projetcId) {
+		
+		
+		String sql="update bidding_details set bid_status='selected' where project_id=?";
+		template.update(sql,new Object[] {projetcId});
+		
+	}
+	
 }

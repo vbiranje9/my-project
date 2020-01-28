@@ -1,7 +1,12 @@
 package com.cdac.StartupProject.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Login {
 
+		//@Size(min =2,max=10)
+		//@NotNull(message="not blank")
 		private String username;
 		private String password;
 		private int flag;
@@ -55,8 +60,5 @@ public class Login {
 		public void setFlag(int flag) {
 			this.flag = flag;
 		}
-		
-		
-		
 		
 }

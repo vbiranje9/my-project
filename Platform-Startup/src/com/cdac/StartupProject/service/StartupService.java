@@ -11,4 +11,7 @@ public interface StartupService {
 	Startup selectByEmail(String email);
 	List<Project> selectAll();
 	List<Startup> selectStp();
+	int getCompanyId(String username);
+	List<String> sname(List<Integer> sid);
+	
 }

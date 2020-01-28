@@ -41,14 +41,14 @@ public class StartupDaoImple implements StartupDao {
 			String gstId = startup.getGstId();
 			//
 	
-			
+			String sql;
 			//setAutoCommit(false);
-			String sql; /*= "select * from gst where gst_id = ? and pan =?";
-			StartUp st = jt.queryForObject(sql,new Object [] {startup.getGstId(),startup.getPan()},new RowMapper<StartUp>(){
+			 sql = "select * from gst where gst_id = ? and pan =?";
+			Startup st = jt.queryForObject(sql,new Object [] {startup.getGstId(),startup.getPan()},new RowMapper<Startup>(){
 
 				@Override
-				public StartUp mapRow(ResultSet rs, int rowNum) throws SQLException {
-					StartUp temp = new StartUp();
+				public Startup mapRow(ResultSet rs, int rowNum) throws SQLException {
+					Startup temp = new Startup();
 					
 					temp.setGstId(rs.getString(1));
 					temp.setPan(rs.getString(3));
@@ -56,10 +56,10 @@ public class StartupDaoImple implements StartupDao {
 				}
 			
 			});
-			*//*
+		
 			
 			if(st == null)
-				return false;*/
+				return false;
 			
 		System.out.println("here");
 			//jdbcTemplate.update(q,new Object[] {student.getRno(),student.getStudentName(),student.getMarks(),student.getJdate()});
@@ -174,6 +174,7 @@ public class StartupDaoImple implements StartupDao {
 					st.setNoOfEmployee(rs.getInt(3));
 					st.setEmail(rs.getString(4));
 					st.setDiscription(rs.getString(2));
+					//st.setName();
 					
 					li.add(st);
 				}
@@ -185,5 +186,23 @@ public class StartupDaoImple implements StartupDao {
 		return list;
 			
 	}
+
+	@Override
+	public int getCompanyId(String username) {
+		String sql = "select company_id from company where email =?";
+		Integer id =jt.queryForObject(sql,new Object[] {username},Integer.class);
+		return id.intValue();
+	}
 	
+	@Override
+	public List<String> sname(List<Integer> sid) {
+		List<String>startupname  = new ArrayList<String>();
+		for (Integer integer : sid) {
+			String sql = "select user_name from user where email =(select email from startup where startup_id = ?)";
+			String s = jt.queryForObject(sql,new Object[] {integer},String.class);
+			startupname.add(s);
+		}
+		
+		return startupname;
+	}
 }

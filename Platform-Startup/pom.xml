@@ -34,12 +34,20 @@
 
 <spring.security.version>3.0.7.RELEASE</spring.security.version>
  </properties>
+
  <dependencies>
 
+
+<dependency>
+    <groupId>taglibs</groupId>
+    <artifactId>standard</artifactId>
+    <version>1.1.2</version>
+</dependency>
+
  <dependency>
- <groupId>org.springframework</groupId>
- <artifactId>spring-core</artifactId>
- <version>${spring.version}</version>
+	 <groupId>org.springframework</groupId>
+ 	<artifactId>spring-core</artifactId>
+ 	<version>${spring.version}</version>
  </dependency>
  <dependency>
  <groupId>org.springframework</groupId>
@@ -111,7 +119,20 @@
     <artifactId>jstl</artifactId>
     <version>1.2</version>
 </dependency>
+ <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Final</version>
+ </dependency>
 
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.0.1.Final</version>
+        </dependency>
+        
+        
+		
  </dependencies>
   
   

@@ -1,4 +1,4 @@
-<%@page import="com.cdac.StartupProject.model.Funding"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Funding list</title>
+<title>Meeting Fix</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
 integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -102,60 +102,16 @@ a:hover {
 
 	<div class="row bg-dark" style="height:50px; padding:10px; font-size:20px;">
 	<div class="col-5"></div>
-		<div class="col-5"><h4 class="text-light">Funding List</h4> </div>
+		<div class="col-5"><h4 class="text-light">Meeting</h4> </div>
 		<div class="col-1"><a href="home_startup.htm" class="text-light">HOME</a></div>
 		 <div class="col-1"><a href="logout.htm" class="text-light"><h4>Logout</h4></a></div>
 	</div>
 	
 </div>
-
-<div class="container mt-2">
-<div class="row">
-	<div class="col-3">
-		
-		<table class="table">
-  			<thead>
-    			<tr class="table-danger">
-     				<th scope="col"></th>
-      				<th scope="col">Startup Name</th>
-  				</tr>
-  			</thead>
-  			<tbody>
-  			
-  				<c:forEach items="${startupname}" var="temp">
-      				<tr class="table-info">
-      				<th></th>
-      				<th scope="row">${temp}</th>
-   				</c:forEach>
-   			
-   			</tbody>
-   		</table>	
-	</div>
-	   
-  	<div class="col-9">
-  	 
- 		<table class="table">	 	
-  			<thead>
-    			<tr class="table-danger">
-     				<th scope="col"></th>
-    				<th scope="col">Description</th>
-       				<th scope="col">Amount</th>
-       				<th scope="col"></th>
-  				</tr>
-  			</thead>
-   			<tbody>
-   				<c:forEach items="${lists}" var="copy">
-   				<tr class="table-info">
-   					<th scope="col"></th>
-      				<td>${copy.fundDescription}</td>
-      				<td>${copy.fundAmount}</td>
-       				<td class="bg-light" ><a href="fixed_meeting.jsp">Fix Meeting</a></td>
- 					<tr>
- 	 			 </c:forEach>
-   			</tbody>   		
-		</table>	
-   </div>
-</div> 	
+<div class="container">
+	
+	<div class="col-12 " style="font-size: 80px;">Meeting is Fixed !!!! Enjoy</div>
+	
 </div>
 </c:if>
 </body>

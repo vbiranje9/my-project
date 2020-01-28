@@ -14,4 +14,8 @@ public interface StartupDao {
 
 	List<Startup> selectStp();
 
+	int getCompanyId(String username);
+
+	List<String> sname(List<Integer> sid);
+
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cdac.StartupProject.dao.CompanyDaoImple;
+import com.cdac.StartupProject.model.Bidding;
 import com.cdac.StartupProject.model.Company;
 import com.cdac.StartupProject.model.Funding;
 import com.cdac.StartupProject.model.Login;
@@ -39,5 +40,27 @@ public class CompanyServiceImple implements CompanyService {
 	public List<Funding> selectStp() {
 		
 		return compimple.selectStp();
+	}
+
+	public List<Bidding> selectStpBid() {
+		// TODO Auto-generated method stub
+		return compimple.selectStpBid();
+	}
+
+	@Override
+	public List<String> sname(List<Integer> sid) {
+		
+		return compimple.sname(sid) ;
+	}
+
+	public List<String> pname(List<Integer> pid) {
+		// TODO Auto-generated method stub
+		return compimple.pname(pid);
+	}
+
+	@Override
+	public void selectProject(int projetcId) {
+		
+		compimple.selectProject(projetcId);
 	}
 }

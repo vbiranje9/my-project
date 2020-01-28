@@ -50,6 +50,22 @@ public class StartupServImpl implements StartupService {
 		return startupDao.selectStp();
 	}
 
+	@Override
+	public int getCompanyId(String username) {
+		
+		return startupDao.getCompanyId(username);
+	}
+
+	@Override
+	public List<String> sname(List<Integer> sid) {
+		
+		return startupDao.sname(sid);
+	}
+
+	
+
+	
+
 	
 
 }

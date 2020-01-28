@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,16 +16,25 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
 </head>
 <body>
 
+<c:if test="${sessionScope.uname == null}">
+	<%-- user is not available --%>
+	<c:redirect url="index.jsp"></c:redirect>
+</c:if>
+
+<c:if test="${sessionScope.uname !=null && sessionScope.role == 2}">
+
 <div class="">
 
-<div class="row bg-dark sticky-top " >
-		<div class="col-5"></div>
-		<div class="col-1" ><h5 style="height:60px; text-align: center; padding:15px"><a href="company_home.jsp">Home</a></h5></div>
-		<div class="col-2" ><h5 style="height:60px; text-align: center; padding:15px"><a href="list_stp_comp.jsp">Fund List</a></h5></div>
-		<div class="col-2"><h5 style="height:65px; text-align: center; padding:15px"><a href="comp_project_list.jsp">Bid Details</a></h5></div>
-		<div class="col-1" ><h5 style="height:60px; text-align: center; padding:15px"><a href="logout.htm">Logout</a></h5></div>
-		<div class="col-1"></div>
+<div class="container-fluid sticky-top" >
+
+	<div class="row bg-dark" style="height:60px; padding:15px; font-size:20px;">
+	<div class="col-5"></div>
+		<div class="col-5"><h4 class="text-light">Add Project</h4> </div>
+		<div class="col-1"><a href="home_startup.htm" class="text-light">HOME</a></div>
+		 <div class="col-1"><a href="logout.htm" class="text-light"><h4>Logout</h4></a></div>
 	</div>
+	
+</div>
 
 <div class="login-page">
 		
@@ -46,5 +57,6 @@ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6J
     </div>
     </div>
     </div>
+</c:if>    
 </body>
 </html>

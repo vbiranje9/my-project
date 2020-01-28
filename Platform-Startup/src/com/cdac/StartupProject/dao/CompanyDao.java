@@ -10,4 +10,10 @@ public interface CompanyDao {
 		 Boolean compLogin(Company comp);
 		 Boolean addProject(Project pro,Login lg);
 		 List<Funding> selectStp();
+		 List<Bidding> selectStpBid();
+		 
+		 List<String> sname(List<Integer> sid);
+		 List<String> pname(List<Integer> pid);
+		void selectProject(int projetcId);
+		
 }

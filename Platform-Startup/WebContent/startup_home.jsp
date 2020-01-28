@@ -90,7 +90,7 @@ a:hover {
 </div>
 
 
-<div class="row bg-dark" style="height:50px; text-align: center; padding:10px;">
+<div class="row bg-dark sticky-top" style="height:50px; text-align: center; padding:10px;">
 <div class="col-2 text-light"><span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span></div>
 <div class="col-2"></div>
 <div class="col-3"><h2 class="text-light">Project List</h2></div>
